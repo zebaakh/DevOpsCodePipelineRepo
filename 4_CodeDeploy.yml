@@ -18,24 +18,8 @@ Resources:
     Type: AWS::CodeDeploy::DeploymentGroup
     Properties: 
       ApplicationName: !Ref CodeDeployApplication
-      Ec2TagFilters: 
-        - Type: "KEY_AND_VALUE"
-          Key: Environment
-          Value: Dev
       ServiceRoleArn: !GetAtt [ CodeDeployServiceRole, Arn ]      
       DeploymentGroupName: DevDeploymentGroup
-
-  CodeDeployProdDeploymentGroup: 
-    Type: AWS::CodeDeploy::DeploymentGroup
-    Properties: 
-      ApplicationName: !Ref CodeDeployApplication
-      Ec2TagFilters: 
-        - Type: "KEY_AND_VALUE"
-          Key: Environment
-          Value: Prod
-      ServiceRoleArn: !GetAtt [ CodeDeployServiceRole, Arn ]      
-      DeploymentGroupName: ProdDeploymentGroup
-
   CodeDeployServiceRole:
     Type: 'AWS::IAM::Role'
     Properties:
