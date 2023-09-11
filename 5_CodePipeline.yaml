@@ -14,10 +14,10 @@ Resources:
   #       - Endpoint: !Ref Email
   #         Protocol: email
 
-  CodePipelineRole:
+  CodePipelineAppRole:
     Type: "AWS::IAM::Role"
     Properties:
-      RoleName: CodePipelineRole
+      RoleName: CodePipelineAppRole
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -44,11 +44,11 @@ Resources:
                   - "s3:GetBucketPolicy"
                 Resource:
                   - !Sub 
-                    - arn:aws:s3:::${ccdemoappartifactbucket08092023}/*
-                    - ccdemoappartifactbucket08092023: !ImportValue ccdemoappartifactbucket08092023
+                    - arn:aws:s3:::${PipelineArtifactBucket}/*
+                    - PipelineArtifactBucket: !ImportValue PipelineArtifactBucket
                   - !Sub 
-                    - arn:aws:s3:::${ccdemoappartifactbucket08092023}
-                    - ccdemoappartifactbucket08092023: !ImportValue ccdemoappartifactbucket08092023
+                    - arn:aws:s3:::${PipelineArtifactBucket}
+                    - PipelineArtifactBucket: !ImportValue PipelineArtifactBucket
               - Effect: "Allow"
                 Action:
                   - "sns:Publish"
@@ -62,19 +62,19 @@ Resources:
                   - "codecommit:GitPull"
                   - "codecommit:UploadArchive"
                 Resource: !Sub
-                  - arn:aws:codecommit:${AWS::Region}:${AWS::AccountId}:${ccDemoAppRepoName}
-                  - ccDemoAppRepoName: !ImportValue ccDemoAppRepoName
+                  - arn:aws:codecommit:${AWS::Region}:${AWS::AccountId}:${DevOpsCodePipelineRepoName}
+                  - DevOpsCodePipelineRepoName: !ImportValue DevOpsCodePipelineRepoName
               - Effect: "Allow"
                 Action:
                   - "codebuild:StartBuild"
                   - "codebuild:BatchGetBuilds"
                 Resource:
                   - !Sub
-                    - arn:aws:codebuild:${AWS::Region}:${AWS::AccountId}:project/${ccDemoAppCodeBuildProject}
-                    - ccDemoAppCodeBuildProject: !ImportValue ccDemoAppCodeBuildProject
+                    - arn:aws:codebuild:${AWS::Region}:${AWS::AccountId}:project/${BuildProjectName}
+                    - BuildProjectName: !ImportValue BuildProjectName
                   - !Sub
-                    - arn:aws:codebuild:${AWS::Region}:${AWS::AccountId}:build/${ccDemoAppCodeBuildProject}:*
-                    - ccDemoAppCodeBuildProject: !ImportValue ccDemoAppCodeBuildProject
+                    - arn:aws:codebuild:${AWS::Region}:${AWS::AccountId}:build/${BuildProjectName}:*
+                    - BuildProjectName: !ImportValue BuildProjectName
               - Effect: Allow
                 Action:
                   - 'codedeploy:CreateDeployment'
@@ -87,8 +87,8 @@ Resources:
   CodePipeline:
     Type: "AWS::CodePipeline::Pipeline"
     Properties:
-      Name: !Sub CICDPipe
-      RoleArn: !GetAtt [ CodePipelineRole, Arn ]
+      Name: !Sub DevOpsCICDPipeline
+      RoleArn: !GetAtt [ CodePipelineAppRole, Arn ]
       Stages:
         - Name: Source
           Actions:
@@ -102,7 +102,7 @@ Resources:
                 - Name: ApplicationOutput
               Configuration:
                 BranchName: master
-                RepositoryName: !ImportValue ccDemoAppRepoName
+                RepositoryName: !ImportValue DevOpsCodePipelineRepoName
               RunOrder: 1
         - Name: Build
           Actions:
@@ -117,10 +117,33 @@ Resources:
               OutputArtifacts:
                 - Name: CodeBuildArtifact
               Configuration:
-                ProjectName: !ImportValue ccDemoAppCodeBuildProject
+                ProjectName: !ImportValue BuildProjectName
               RunOrder: 1
-        - Name: DeployToDev
+
+        - Name: Deploy_TO_DEV
           Actions:
+           - Name: DeployDev
+          ActionTypeID:
+            Category: Deploy
+            Owner: ANS
+            Version: 1
+            Provider: CloudFormation
+          OutputArtifacts: []
+          InputArtifacts:
+            - Name: Source-Artifacts
+          Configuration:
+           ActionMode: CREATE UPDATE
+          Capabilities: 'CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND'
+          RoleArn: !Sub arn:aws:iam::${TargetAccountDev}:role/${Teamilane}-cloudformation-execution-v2
+          StackName: !Sub ${Teamwane}-devi=k
+          TemplatePath: Source-Artifacts:CICDCodePipelineCF/sqs-cfn.yaml
+          TemplateConfiguration: !Sub Source-Artifacts::ac/Environments/dev/dev-kes-vars.json
+    RoleArn: !Sub arn:aws:iam::${TangetAccountDey}:role/${Teamtlane}-pipeline-crossaccount-role
+    Runorder: 2
+
+
+              - Name: DeployToDev
+                Actions:
             - Name: DeployToDev
               InputArtifacts:
                 - Name: CodeBuildArtifact
@@ -128,10 +151,9 @@ Resources:
                 Category: Deploy
                 Owner: AWS
                 Version: 1
-                Provider: CodeDeploy
+                Provider: CloudFormation
               Configuration:
-                ApplicationName: !ImportValue CodeDeployApplication
-                DeploymentGroupName: !ImportValue CodeDeployDevDeploymentGroup
+                ApplicationName: !ImportValue CodeDeployApp
               RunOrder: 1
         - Name: ManualApproval
           Actions:
@@ -145,21 +167,21 @@ Resources:
               #   NotificationArn: !Ref CodePipelineSNSTopic
               #   CustomData: Approve Production deployment
               RunOrder: 1
-        - Name: DeployToProd
-          Actions:
-            - Name: DeployToProd
-              InputArtifacts:
-                - Name: CodeBuildArtifact
-              ActionTypeId:
-                Category: Deploy
-                Owner: AWS
-                Version: 1
-                Provider: CodeDeploy
-              Configuration:
-                ApplicationName: !ImportValue CodeDeployApplication
-                DeploymentGroupName: !ImportValue CodeDeployProdDeploymentGroup
-              RunOrder: 1
+        # - Name: DeployToProd
+        #   Actions:
+        #     - Name: DeployToProd
+        #       InputArtifacts:
+        #         - Name: CodeBuildArtifact
+        #       ActionTypeId:
+        #         Category: Deploy
+        #         Owner: AWS
+        #         Version: 1
+        #         Provider: CodeDeploy
+        #       Configuration:
+        #         ApplicationName: !ImportValue CodeDeployApplication
+        #         DeploymentGroupName: !ImportValue CodeDeployProdDeploymentGroup
+        #       RunOrder: 1
 
       ArtifactStore:
         Type: S3
-        Location: !ImportValue ccdemoappartifactbucket08092023
+        Location: !ImportValue PipelineArtifactBucket

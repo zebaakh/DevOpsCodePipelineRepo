@@ -8,7 +8,7 @@ Parameters:
     Default: ""
 
 Resources:
-  CodeDeployApplication:
+  CodeDeployApp:
     Type: AWS::CodeDeploy::Application
     Properties: 
       ApplicationName: !Ref CodeDeployAppName
@@ -17,13 +17,13 @@ Resources:
   CodeDeployDevDeploymentGroup: 
     Type: AWS::CodeDeploy::DeploymentGroup
     Properties: 
-      ApplicationName: !Ref CodeDeployApplication
-      ServiceRoleArn: !GetAtt [ CodeDeployServiceRole, Arn ]      
+      ApplicationName: !Ref CodeDeployApp
+      ServiceRoleArn: !GetAtt [ CodeDeploySrvcRole, Arn ]      
       DeploymentGroupName: DevDeploymentGroup
-  CodeDeployServiceRole:
+  CodeDeploySrvcRole:
     Type: 'AWS::IAM::Role'
     Properties:
-      RoleName: CodeDeployServiceRole
+      RoleName: CodeDeploySrvcRole
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -51,23 +51,13 @@ Resources:
                 Resource: '*'
 
 Outputs:
-  CodeDeployServiceRole:
+  CodeDeploySrvcRole:
     Description: CodeDeploy Service Role Name
-    Value: !Ref CodeDeployServiceRole
+    Value: !Ref CodeDeploySrvcRole
     Export:
-      Name: CodeDeployServiceRole
-  CodeDeployApplication:
+      Name: CodeDeploySrvcRole
+  CodeDeployApp:
     Description: CodeDeploy Application Name
-    Value: !Ref CodeDeployApplication
+    Value: !Ref CodeDeployApp
     Export:
-      Name: CodeDeployApplication
-  CodeDeployDevDeploymentGroup:
-    Description: CodeDeploy Dev Deployment Group Name
-    Value: !Ref CodeDeployDevDeploymentGroup
-    Export:
-      Name: CodeDeployDevDeploymentGroup
-  CodeDeployProdDeploymentGroup:
-    Description: CodeDeploy Prod Deployment Group Name
-    Value: !Ref CodeDeployProdDeploymentGroup
-    Export:
-      Name: CodeDeployProdDeploymentGroup
+      Name: CodeDeployApp

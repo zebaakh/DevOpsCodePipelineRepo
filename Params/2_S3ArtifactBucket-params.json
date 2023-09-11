@@ -1,6 +1,6 @@
 [
-    {
+{
         "ParameterKey": "BucketName",
-        "ParameterValue": "ccdemoappartifactbucket08092023"
-    }
+        "ParameterValue": "pipelineartifactbucket09072023"
+}
 ]

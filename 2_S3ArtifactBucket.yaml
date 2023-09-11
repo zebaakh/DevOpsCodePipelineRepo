@@ -17,8 +17,14 @@ Resources:
         Status: Enabled
 
 Outputs:
-  ccDemoAppArtifactBucket:
+  PipelineArtifactBucket:
     Description: CodePipeline Artifact Bucket Name
     Value: !Ref BucketName
     Export:
-      Name: ccdemoappartifactbucket08092023
+      Name: PipelineArtifactBucket
+
+  # pipelineartifactbucket09072023:
+  #   Description: CodePipeline Artifact Bucket Name
+  #   Value: !Ref BucketName
+  #   Export:
+  #     Name: pipelineartifactbucket09072023

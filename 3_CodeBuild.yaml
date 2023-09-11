@@ -8,31 +8,31 @@ Parameters:
     Default: ""
 
 Resources:
-  ccDemoAppCodeBuildProject:
+  DevOpsCodeBuildProject:
     Type: AWS::CodeBuild::Project
     Properties:
       Name: !Ref BuildProjectName
       Description: Build App
-      ServiceRole: !GetAtt [ ccDemoAppCodeBuildRole, Arn ]
+      ServiceRole: !GetAtt [ DevOpsCodeBuildRole, Arn ]
       Artifacts:
         Type: S3
         Name: !Ref BuildProjectName        
-        Location: !ImportValue ccdemoappartifactbucket08092023
+        Location: !ImportValue PipelineArtifactBucket
       Environment:
         Type: LINUX_CONTAINER
         ComputeType: BUILD_GENERAL1_SMALL
         Image: aws/codebuild/java:openjdk-11
       Source:
         Location: !Sub 
-          - https://git-codecommit.${AWS::Region}.amazonaws.com/v1/repos/${ccDemoAppRepoName}
-          - ccDemoAppRepoName: !ImportValue ccDemoAppRepoName
+          - https://git-codecommit.${AWS::Region}.amazonaws.com/v1/repos/${DevOpsCodePipelineRepoName}
+          - DevOpsCodePipelineRepoName: !ImportValue DevOpsCodePipelineRepoName
         Type: CODECOMMIT
       TimeoutInMinutes: 15
 
-  ccDemoAppCodeBuildRole:
+  DevOpsCodeBuildRole:
     Type: "AWS::IAM::Role"
     Properties:
-      RoleName: ccDemoAppCodeBuildRole
+      RoleName: DevOpsCodeBuildRole
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -44,7 +44,7 @@ Resources:
               - "sts:AssumeRole"
       Path: /service-role/
       Policies:
-        - PolicyName: ccDemoAppCodeCommitPolicy
+        - PolicyName: DevOpsCodeCommitPolicy
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
@@ -52,8 +52,8 @@ Resources:
                 Action:
                   - "codecommit:GitPull"
                 Resource: !Sub
-                  - arn:aws:codecommit:${AWS::Region}:${AWS::AccountId}:${ccDemoAppRepoName}
-                  - ccDemoAppRepoName: !ImportValue ccDemoAppRepoName
+                  - arn:aws:codecommit:${AWS::Region}:${AWS::AccountId}:${DevOpsCodePipelineRepoName}
+                  - DevOpsCodePipelineRepoName: !ImportValue DevOpsCodePipelineRepoName
               - Effect: "Allow"
                 Action:
                   - "logs:CreateLogGroup"
@@ -69,20 +69,26 @@ Resources:
                 Resource:
                   - !Sub arn:aws:s3:::codepipeline-${AWS::Region}-*
                   - !Sub 
-                    - arn:aws:s3:::${ccdemoappartifactbucket08092023}/*
-                    - ccdemoappartifactbucket08092023: !ImportValue ccdemoappartifactbucket08092023
+                    - arn:aws:s3:::${PipelineArtifactBucket}/*
+                    - PipelineArtifactBucket: !ImportValue PipelineArtifactBucket
                   - !Sub 
-                    - arn:aws:s3:::${ccdemoappartifactbucket08092023}
-                    - ccdemoappartifactbucket08092023: !ImportValue ccdemoappartifactbucket08092023
+                    - arn:aws:s3:::${PipelineArtifactBucket}
+                    - PipelineArtifactBucket: !ImportValue PipelineArtifactBucket
 
 Outputs:
-  ccDemoAppCodeBuildRole:
+  DevOpsCodeBuildRole:
     Description: CodeBuild Role Name
-    Value: !Ref ccDemoAppCodeBuildRole
+    Value: !Ref DevOpsCodeBuildRole
     Export:
-      Name: ccDemoAppCodeBuildRole
-  ccDemoAppCodeBuildProject:
+      Name: DevOpsCodeBuildRole
+  # DevOpsCodeBuildProject:
+  #   Description: CodeBuild Project Name
+  #   Value: !Ref DevOpsCodeBuildProject
+  #   Export:
+  #     Name: DevOpsCodeBuildProject
+
+  BuildProjectName:
     Description: CodeBuild Project Name
-    Value: !Ref ccDemoAppCodeBuildProject
+    Value: !Ref BuildProjectName
     Export:
-      Name: ccDemoAppCodeBuildProject
+      Name: BuildProjectName

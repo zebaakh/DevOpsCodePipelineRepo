@@ -8,19 +8,21 @@ Parameters:
     Default: ""
 
 Resources:
-  ccDemoAppRepo:
+  DevOpsCodePipelineRepo:
     Type: AWS::CodeCommit::Repository
     Properties:
       RepositoryName: !Ref RepoName 
 
 Outputs:
-  ccDemoAppRepoName:
+  # ccDemoAppRepoName:
+  DevOpsCodePipelineRepoName: 
     Description: CodeCommit Repo Name
-    Value: !GetAtt ccDemoAppRepo.Name
+    Value: !GetAtt DevOpsCodePipelineRepo.Name
     Export:
-      Name: ccDemoAppRepoName
-  ccDemoAppRepoHTTPCloneURL:
+      Name: DevOpsCodePipelineRepoName
+  #ccDemoAppRepoHTTPCloneURL:
+  DevOpsCodePipelineRepoHTTPCloneURL:
     Description: CodeCommit Repo HTTP Clone URL
-    Value: !GetAtt ccDemoAppRepo.CloneUrlHttp
+    Value: !GetAtt DevOpsCodePipelineRepo.CloneUrlHttp
     Export:
-      Name: ccDemoAppRepoHTTPCloneURL
+      Name: DevOpsCodePipelineRepoHTTPCloneURL
