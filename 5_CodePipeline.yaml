@@ -156,7 +156,7 @@ Resources:
               RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
               StackName: !Ref SQSStackName
               TemplatePath: CodeBuildArtifact::sqs-cfn.yaml
-              TemplateConfiguration: ".params/sqs-param.json"
+              TemplateConfiguration: !Sub CodeBuildArtifact::sqs-param.json
              RunOrder: 1
 
 
