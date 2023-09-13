@@ -1,0 +1,18 @@
+[
+{
+    "ParameterKey": "Queue1Name",
+    "ParameterValue": "aws-poc-cicd-queue-1"
+},
+{
+    "ParameterKey": "Queue2Name",
+    "ParameterValue": "aws-poc-cicd-queue-2"
+},
+{
+    "ParameterKey": "Lambda1FunctionName",
+    "ParameterValue": "aws-poc-cicd-lambda-1"
+},
+{
+    "ParameterKey": "SourceBucketName",
+    "ParameterValue": "aws-poc-cicd-src-bucket09062023"
+}
+]
