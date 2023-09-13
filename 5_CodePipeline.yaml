@@ -1,19 +1,24 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: Template to create CodePipeline
+Description: Template to create CodePipeline with associated rules and Policies
 
-# Parameters:
-  # Email:
-  #   Description: Email address where CodePipeline sends pipeline notifications
-  #   Type: String 
+Parameters:
+  TeamName:
+    Type: String
+    Description: Name of the Team
+  ApplicationName:
+    Type: String
+    Description: Name of the Application 
+  RepoName:
+    Type: String
+    Description: Name of the CodeCommit Repo
+  BucketName:
+    Type: String
+    Description: Bucket where the artifact can be found.
+  SQSStackName:
+    Type: String
+    Description: SQS stack name.
 
 Resources:
-  # CodePipelineSNSTopic:
-  #   Type: AWS::SNS::Topic
-  #   Properties:
-  #     Subscription:
-  #       - Endpoint: !Ref Email
-  #         Protocol: email
-
   CodePipelineAppRole:
     Type: "AWS::IAM::Role"
     Properties:
@@ -120,54 +125,53 @@ Resources:
                 ProjectName: !ImportValue BuildProjectName
               RunOrder: 1
 
-        - Name: Deploy_TO_DEV
+        - Name: Deploy_SQS
           Actions:
-           - Name: DeployDev
-          ActionTypeID:
-            Category: Deploy
-            Owner: ANS
-            Version: 1
-            Provider: CloudFormation
-          OutputArtifacts: []
-          InputArtifacts:
-            - Name: Source-Artifacts
-          Configuration:
-           ActionMode: CREATE UPDATE
-          Capabilities: 'CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND'
-          RoleArn: !Sub arn:aws:iam::${TargetAccountDev}:role/${Teamilane}-cloudformation-execution-v2
-          StackName: !Sub ${Teamwane}-devi=k
-          TemplatePath: Source-Artifacts:CICDCodePipelineCF/sqs-cfn.yaml
-          TemplateConfiguration: !Sub Source-Artifacts::ac/Environments/dev/dev-kes-vars.json
-    RoleArn: !Sub arn:aws:iam::${TangetAccountDey}:role/${Teamtlane}-pipeline-crossaccount-role
-    Runorder: 2
+           - Name: DeployToDev
+             ActionTypeId:
+              Category: Deploy
+              Owner: AWS
+              Version: 1
+              Provider: CloudFormation
+          # OutputArtifacts:
+             InputArtifacts:
+              - Name: CodeBuildArtifact
+             Configuration:
+              ActionMode: CREATE_UPDATE
+              Capabilities: 'CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND'
+              RoleArn: !Sub arn:aws:iam::971996090633:role/aws-poc-lambda-role
+              StackName: !Ref SQSStackName
+              TemplatePath: sqs-cfn.yaml
+              TemplateConfiguration: ".params/sqs-param.json"
+             RunOrder: 1
 
 
-              - Name: DeployToDev
-                Actions:
-            - Name: DeployToDev
-              InputArtifacts:
-                - Name: CodeBuildArtifact
-              ActionTypeId:
-                Category: Deploy
-                Owner: AWS
-                Version: 1
-                Provider: CloudFormation
-              Configuration:
-                ApplicationName: !ImportValue CodeDeployApp
-              RunOrder: 1
-        - Name: ManualApproval
-          Actions:
-            - Name: ManualApproval
-              ActionTypeId:
-                Category: Approval
-                Owner: AWS
-                Version: 1
-                Provider: Manual
-              # Configuration:
-              #   NotificationArn: !Ref CodePipelineSNSTopic
-              #   CustomData: Approve Production deployment
-              RunOrder: 1
-        # - Name: DeployToProd
+        # - Name: Deploy_To_Dev
+        #   Actions:
+        #     - Name: DeployToDev
+        #       InputArtifacts:
+        #         - Name: CodeBuildArtifact
+        #       # ActionTypeId:
+        #       #   Category: Deploy
+        #       #   Owner: AWS
+        #       #   Version: 1
+        #       #   Provider: CloudFormation
+        #       Configuration:
+        #         ApplicationName: !ImportValue CodeDeployApp
+        #       RunOrder: 1
+            # - Name: ManualApproval
+            #   # :Actions
+            #   #  - Name: ManualApproval
+            #   ActionTypeId:
+            #     Category: Approval
+            #     Owner: AWS
+            #     Version: 1
+            #     Provider: Manual
+            #   # Configuration:
+            #   #   NotificationArn: !Ref CodePipelineSNSTopic
+            #   #   CustomData: Approve Production deployment
+            #   RunOrder: 1
+             # - Name: DeployToProd
         #   Actions:
         #     - Name: DeployToProd
         #       InputArtifacts:

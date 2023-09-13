@@ -22,9 +22,3 @@ Outputs:
     Value: !Ref BucketName
     Export:
       Name: PipelineArtifactBucket
-
-  # pipelineartifactbucket09072023:
-  #   Description: CodePipeline Artifact Bucket Name
-  #   Value: !Ref BucketName
-  #   Export:
-  #     Name: pipelineartifactbucket09072023
