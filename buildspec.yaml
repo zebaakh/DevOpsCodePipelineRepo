@@ -1,11 +1,11 @@
-version: 0.2
+version: 0.1
 phases:
-  build:
+  install:
     commands:
-      - mkdir -p build/artifacts
-      - cp DevOpsCodePipelineRepo/sqs-cfn.yaml build/artifacts/
-      - cp DevOpsCodePipelineRepo/params/sqs-param.json build/artifacts/
-      - cd build && zip -r my-artifact.zip artifacts/
-      - aws s3 cp my-artifact.zip s3://pipelineartifactbucket09072023/
+      - aws cloudformation package --template-file samTemplate.yaml --s3-bucket pipelineartifactbucket09072023 --output-template-file outputSamTemplate.yaml
 artifacts:
-  files: 'build/my-artifact.zip'
+  type: zip
+  files:
+    - samTemplate.yaml
+    - outputSamTemplate.yaml
+    - '**/*'
