@@ -154,8 +154,10 @@ Resources:
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
               RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
               StackName: !Ref SQSStackName
-              TemplatePath: CodeBuildArtifact::sqs-cfn.yaml
-              TemplateConfiguration: CodeBuildArtifact::Params/sqs-cfn.json
+              BranchName: master
+              RepositoryName: !ImportValue DevOpsIacRepoName
+              TemplatePath: CodeBuildArtifact::DevOpsIacRepoName/sqs-cfn.yaml
+              TemplateConfiguration: CodeBuildArtifact::DevOpsIacRepoName/params/sqs-param.json
              RunOrder: 1
 
             # - Name: ManualApproval

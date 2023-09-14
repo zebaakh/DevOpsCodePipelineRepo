@@ -7,8 +7,9 @@ phases:
 artifacts:
   type: zip
   files:
-    - sqs-cfn.yaml
+    #- sqs-cfn.yaml
+    - DevOpsIacRepoName/sqs-cfn.yaml
     - outputsqstemplate.yaml
-    - Params/sqs-cfn.json
-    #- '**/*'
+    #- Params/sqs-cfn.json
+    - DevOpsIacRepoName/params/sqs-param.json
     

@@ -13,16 +13,32 @@ Resources:
     Properties:
       RepositoryName: !Ref RepoName 
 
+  DevOpsIacRepo:
+    Type: AWS::CodeCommit::Repository
+    Properties:
+      RepositoryName: !Ref RepoName  
+
 Outputs:
-  # ccDemoAppRepoName:
   DevOpsCodePipelineRepoName: 
     Description: CodeCommit Repo Name
     Value: !GetAtt DevOpsCodePipelineRepo.Name
     Export:
       Name: DevOpsCodePipelineRepoName
-  #ccDemoAppRepoHTTPCloneURL:
+
+  DevOpsIacRepoName: 
+    Description: CodeCommit Repo Name
+    Value: !GetAtt DevOpsIacRepo.Name
+    Export:
+      Name: DevOpsIacRepoName
+
   DevOpsCodePipelineRepoHTTPCloneURL:
     Description: CodeCommit Repo HTTP Clone URL
     Value: !GetAtt DevOpsCodePipelineRepo.CloneUrlHttp
     Export:
       Name: DevOpsCodePipelineRepoHTTPCloneURL
+
+  DevOpsIacRepoHTTPCloneURL:
+    Description: CodeCommit Repo HTTP Clone URL
+    Value: !GetAtt DevOpsIacRepo.CloneUrlHttp
+    Export:
+      Name: DevOpsIacRepoHTTPCloneURL

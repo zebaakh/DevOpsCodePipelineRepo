@@ -81,11 +81,6 @@ Outputs:
     Value: !Ref DevOpsCodeBuildRole
     Export:
       Name: DevOpsCodeBuildRole
-  # DevOpsCodeBuildProject:
-  #   Description: CodeBuild Project Name
-  #   Value: !Ref DevOpsCodeBuildProject
-  #   Export:
-  #     Name: DevOpsCodeBuildProject
 
   BuildProjectName:
     Description: CodeBuild Project Name
