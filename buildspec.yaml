@@ -12,5 +12,4 @@ artifacts:
     - sqs-cfn.yaml
     - outputSamTemplate.yaml
     - outputsqstemplate.yaml
-    - sqs-param.json
-    - '**/*'
+        - '**/*'

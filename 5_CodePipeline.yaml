@@ -158,7 +158,7 @@ Resources:
               StackName: !Ref SQSStackName
               TemplatePath: CodeBuildArtifact::sqs-cfn.yaml
               # TemplateConfiguration: CodeBuildArtifact::sqs-param.json
-              TemplateConfiguration: CodeBuildArtifact::sqs-param.json
+              TemplateConfiguration: CodeBuildArtifact::sqs-cfntest.json
              RunOrder: 1
 
 
