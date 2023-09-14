@@ -155,7 +155,7 @@ Resources:
               RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
               StackName: !Ref SQSStackName
               TemplatePath: CodeBuildArtifact::sqs-cfn.yaml
-              TemplateConfiguration: CodeBuildArtifact::sqs-cfn.json
+              TemplateConfiguration: CodeBuildArtifact::Params/sqs-cfn.json
              RunOrder: 1
 
             # - Name: ManualApproval
