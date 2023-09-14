@@ -10,6 +10,6 @@ artifacts:
     - sqs-cfn.yaml
     # - DevOpsIacRepo/sqs-cfn.yaml
     - outputsqstemplate.yaml
-    - Params/sqs-cfn.json
+    - Params/sqs-param.json
     # - DevOpsIacRepo/params/sqs-param.json
     
