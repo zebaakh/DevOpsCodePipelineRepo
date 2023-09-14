@@ -1,9 +1,10 @@
 [
     {"ParameterKey":"TeamName","ParameterValue": "AWSDevOps"},
     {"ParameterKey":"ApplicationName","ParameterValue": "CodeDeployApp"},
-    {"ParameterKey":"RepoName","ParameterValue": "DevOpsIacRepo"},
+    {"ParameterKey":"RepoName","ParameterValue": "DevOpsIacRepoName"},
+    {"ParameterKey":"RepoName","ParameterValue": "DevOpsCodePipelineRepoName"},
     {"ParameterKey":"BucketName","ParameterValue": "pipelineartifactbucket09072023"},
-    {"ParameterKey":"SQSStackName","ParameterValue": "sqsqueu1stack"}
+    {"ParameterKey":"SQSStackName","ParameterValue": "sqsqueu1stack"} 
 
 ]
 
