@@ -122,7 +122,7 @@ Resources:
               Configuration:
                 BranchName: master
                 RepositoryName: !ImportValue DevOpsCodePipelineRepoName
-                RepositoryName: !ImportValue DevOpsIacRepoName
+                # RepositoryName: !ImportValue DevOpsIacRepoName
               RunOrder: 1
         - Name: Build
           Actions:
@@ -155,10 +155,10 @@ Resources:
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
               RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
               StackName: !Ref SQSStackName
-              BranchName: master
-              RepositoryName: !ImportValue DevOpsIacRepoName
-              TemplatePath: CodeBuildArtifact::DevOpsIacRepo/sqs-cfn.yaml
-              TemplateConfiguration: CodeBuildArtifact::DevOpsIacRepo/params/sqs-param.json
+              # BranchName: master
+              # RepositoryName: !ImportValue DevOpsIacRepoName
+              TemplatePath: CodeBuildArtifact::sqs-cfn.yaml
+              TemplateConfiguration: CodeBuildArtifact::Params/sqs-param.json
              RunOrder: 1
 
             # - Name: ManualApproval
