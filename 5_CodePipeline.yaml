@@ -147,34 +147,17 @@ Resources:
               Owner: AWS
               Version: 1
               Provider: CloudFormation
-              # OutputArtifacts:
-              # outputArtifactFormat: "CODE ZIP"
              InputArtifacts:
               - Name: CodeBuildArtifact
              Configuration:
               ActionMode: CREATE_UPDATE
-              Capabilities: 'CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_AUTO_EXPAND'
+              Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
               RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
               StackName: !Ref SQSStackName
               TemplatePath: CodeBuildArtifact::sqs-cfn.yaml
-              # TemplateConfiguration: CodeBuildArtifact::sqs-param.json
-              TemplateConfiguration: CodeBuildArtifact::sqs-cfntest.json
+              TemplateConfiguration: CodeBuildArtifact::sqs-cfn.json
              RunOrder: 1
 
-
-        # - Name: Deploy_To_Dev
-        #   Actions:
-        #     - Name: DeployToDev
-        #       InputArtifacts:
-        #         - Name: CodeBuildArtifact
-        #       # ActionTypeId:
-        #       #   Category: Deploy
-        #       #   Owner: AWS
-        #       #   Version: 1
-        #       #   Provider: CloudFormation
-        #       Configuration:
-        #         ApplicationName: !ImportValue CodeDeployApp
-        #       RunOrder: 1
             # - Name: ManualApproval
             #   # :Actions
             #   #  - Name: ManualApproval
@@ -187,20 +170,6 @@ Resources:
             #   #   NotificationArn: !Ref CodePipelineSNSTopic
             #   #   CustomData: Approve Production deployment
             #   RunOrder: 1
-             # - Name: DeployToProd
-        #   Actions:
-        #     - Name: DeployToProd
-        #       InputArtifacts:
-        #         - Name: CodeBuildArtifact
-        #       ActionTypeId:
-        #         Category: Deploy
-        #         Owner: AWS
-        #         Version: 1
-        #         Provider: CodeDeploy
-        #       Configuration:
-        #         ApplicationName: !ImportValue CodeDeployApplication
-        #         DeploymentGroupName: !ImportValue CodeDeployProdDeploymentGroup
-        #       RunOrder: 1
 
       ArtifactStore:
         Type: S3
