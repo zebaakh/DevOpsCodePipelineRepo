@@ -156,8 +156,8 @@ Resources:
               StackName: !Ref SQSStackName
               BranchName: master
               RepositoryName: !ImportValue DevOpsIacRepoName
-              TemplatePath: CodeBuildArtifact::DevOpsIacRepoName/sqs-cfn.yaml
-              TemplateConfiguration: CodeBuildArtifact::DevOpsIacRepoName/params/sqs-param.json
+              TemplatePath: CodeBuildArtifact::DevOpsIacRepo/sqs-cfn.yaml
+              TemplateConfiguration: CodeBuildArtifact::DevOpsIacRepo/params/sqs-param.json
              RunOrder: 1
 
             # - Name: ManualApproval

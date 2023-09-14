@@ -2,14 +2,14 @@ version: 0.1
 phases:
   install:
     commands:
-      - aws cloudformation package --template-file sqs-cfn.yaml --s3-bucket pipelineartifactbucket09072023 --output-template-file outputsqstemplate.yaml
+      - aws cloudformation package --template-file DevOpsIacRepo/sqs-cfn.yaml --s3-bucket pipelineartifactbucket09072023 --output-template-file outputsqstemplate.yaml
       
 artifacts:
   type: zip
   files:
     #- sqs-cfn.yaml
-    - DevOpsIacRepoName/sqs-cfn.yaml
+    - DevOpsIacRepo/sqs-cfn.yaml
     - outputsqstemplate.yaml
     #- Params/sqs-cfn.json
-    - DevOpsIacRepoName/params/sqs-param.json
+    - DevOpsIacRepo/params/sqs-param.json
     
