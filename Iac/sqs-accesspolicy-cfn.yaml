@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: CloudFormation template with YAML - SQS Definition
+Parameters:
+  Lambda1FunctionName:
+    Type: String
+    Default: ""
+    Description: Name for Lambda function 1
+Resources:
+  # BucketToQueuePermission:
+  #   Type: AWS::SQS::QueuePolicy
+  #   DependsOn:
+  #      - Queue1
+  #   Properties:
+  #     PolicyDocument:
+  #       Version: '2012-10-17'
+  #       Statement:
+  #         - Effect: Allow
+  #           Principal: 
+  #             Service: 's3.amazonaws.com'
+  #           Action: sqs:SendMessage
+  #           Resource: !GetAtt Queue1.Arn
+  #           Condition:
+  #             ArnLike:
+  #               aws:SourceArn: !Sub 'arn:aws:s3:::${SourceBucketName}'
+  #     Queues:
+  #       - !Ref Queue1
+  
+  LambdaToQueuePermission:
+    Type: AWS::SQS::QueuePolicy
+    DependsOn:
+        - !ImportValue Queue2
+    Properties:
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: 
+              Service: 'lambda.amazonaws.com'
+            Action: sqs:SendMessage
+            Resource: !ImportValue Queue2
+            Condition:
+              ArnLike:
+                aws:SourceArn: !Sub 'arn:aws:lambda:::${Lambda1FunctionName}'
+      Queues:
+        - !ImportValue Queue2

@@ -17,6 +17,9 @@ Parameters:
   SQSStackName:
     Type: String
     Description: SQS stack name.
+  S3StackName:
+    Type: String
+    Description: S3 stack name.
 
 Resources:
   CodePipelineAppRole:
@@ -47,6 +50,7 @@ Resources:
                   - "s3:ListBucket"
                   - "s3:PutObject"
                   - "s3:GetBucketPolicy"
+                  - "s3:*"
                 Resource:
                   - !Sub 
                     - arn:aws:s3:::${PipelineArtifactBucket}/*
@@ -155,11 +159,28 @@ Resources:
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
               RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
               StackName: !Ref SQSStackName
-              # BranchName: master
-              # RepositoryName: !ImportValue DevOpsIacRepoName
               TemplatePath: CodeBuildArtifact::Iac/sqs-cfn.yaml
               TemplateConfiguration: CodeBuildArtifact::Params/sqs-param.json
              RunOrder: 1
+
+        - Name: Deploy_S3
+          Actions:
+           - Name: DeployToDev
+             ActionTypeId:
+              Category: Deploy
+              Owner: AWS
+              Version: 1
+              Provider: CloudFormation
+             InputArtifacts:
+              - Name: CodeBuildArtifact
+             Configuration:
+              ActionMode: CREATE_UPDATE
+              Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
+              RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
+              StackName: !Ref S3StackName
+              TemplatePath: CodeBuildArtifact::Iac/s3-cfn.yaml
+              TemplateConfiguration: CodeBuildArtifact::Params/s3-param.json
+             RunOrder: 2
 
             # - Name: ManualApproval
             #   # :Actions

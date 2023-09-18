@@ -1,0 +1,7 @@
+{ 
+  "Parameters": {
+     "SourceBucketName": "aws-poc-cicd-src-bucket09062023",
+     "DestinationBucketName": "aws-poc-cicd-dest-bucket09062023",
+     "MetadataBucketName": "aws-poc-cicd-metadata-bucket09062023"
+  }
+}

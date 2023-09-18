@@ -1,0 +1,5 @@
+{ 
+  "Parameters": {
+     "AthenaWorkGroupName": "aws-poc-cicd-athena-workgroup"  
+  }
+}

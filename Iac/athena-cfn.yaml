@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Template for Lambda Sample.
+Parameters:
+  AthenaWorkGroupName:
+    Type: String
+    Default: ""
+    Description: Name for Athena workgroup
+
+Resources:
+  AthenaWorkGroup:
+    Type: AWS::Athena::WorkGroup
+    Properties:
+      Name: !Ref AthenaWorkGroupName
+      WorkGroupConfiguration:
+        ResultConfiguration:
+          OutputLocation: !Sub 
+                          - 's3://${MetadataBucketName}/'
+                          - MetadataBucketName: !ImportValue MetadataBucketName
+
+Outputs:
+  AthenaWorkGroupName:
+    Description: Athena work group name
+    Value: !Ref AthenaWorkGroupName
+    Export:
+      Name: AthenaWorkGroupName
