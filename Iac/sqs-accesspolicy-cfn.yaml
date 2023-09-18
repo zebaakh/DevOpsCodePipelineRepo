@@ -10,7 +10,7 @@ Resources:
   BucketToQueuePermission:
     Type: AWS::SQS::QueuePolicy
     DependsOn:
-       - !ImportValue Queue1
+       - !ImportValue Queue1Name
     Properties:
       PolicyDocument:
         Version: '2012-10-17'
@@ -29,7 +29,7 @@ Resources:
   LambdaToQueuePermission:
     Type: AWS::SQS::QueuePolicy
     DependsOn:
-        - !ImportValue Queue2
+        - !ImportValue Queue2Name
     Properties:
       PolicyDocument:
         Version: '2012-10-17'

@@ -84,6 +84,12 @@ Outputs:
     Export:
       Name: Queue1Name
 
+  Queue2Name:
+    Description: SQS queue2 name
+    Value: !Ref Queue2Name
+    Export:
+      Name: Queue2Name
+
   Queue2:
     Description: SQS queue2 name
     Value: !Ref Queue2
