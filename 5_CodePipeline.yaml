@@ -157,7 +157,7 @@ Resources:
               StackName: !Ref SQSStackName
               # BranchName: master
               # RepositoryName: !ImportValue DevOpsIacRepoName
-              TemplatePath: CodeBuildArtifact::sqs-cfn.yaml
+              TemplatePath: CodeBuildArtifact::Iac/sqs-cfn.yaml
               TemplateConfiguration: CodeBuildArtifact::Params/sqs-param.json
              RunOrder: 1
 
