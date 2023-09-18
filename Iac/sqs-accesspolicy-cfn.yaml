@@ -7,24 +7,24 @@ Parameters:
     Default: ""
     Description: Name for Lambda function 1
 Resources:
-  # BucketToQueuePermission:
-  #   Type: AWS::SQS::QueuePolicy
-  #   DependsOn:
-  #      - Queue1
-  #   Properties:
-  #     PolicyDocument:
-  #       Version: '2012-10-17'
-  #       Statement:
-  #         - Effect: Allow
-  #           Principal: 
-  #             Service: 's3.amazonaws.com'
-  #           Action: sqs:SendMessage
-  #           Resource: !GetAtt Queue1.Arn
-  #           Condition:
-  #             ArnLike:
-  #               aws:SourceArn: !Sub 'arn:aws:s3:::${SourceBucketName}'
-  #     Queues:
-  #       - !Ref Queue1
+  BucketToQueuePermission:
+    Type: AWS::SQS::QueuePolicy
+    DependsOn:
+       - Queue1
+    Properties:
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: 
+              Service: 's3.amazonaws.com'
+            Action: sqs:SendMessage
+            Resource: !GetAtt Queue1.Arn
+            Condition:
+              ArnLike:
+                aws:SourceArn: !Sub 'arn:aws:s3:::${SourceBucketName}'
+      Queues:
+        - !Ref Queue1
   
   LambdaToQueuePermission:
     Type: AWS::SQS::QueuePolicy
