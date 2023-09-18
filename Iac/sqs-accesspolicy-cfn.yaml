@@ -10,7 +10,7 @@ Resources:
   BucketToQueuePermission:
     Type: AWS::SQS::QueuePolicy
     DependsOn:
-       - Queue1
+       - !ImportValue Queue1
     Properties:
       PolicyDocument:
         Version: '2012-10-17'
@@ -24,7 +24,7 @@ Resources:
               ArnLike:
                 aws:SourceArn: !Sub 'arn:aws:s3:::${SourceBucketName}'
       Queues:
-        - !Ref Queue1
+        - !ImportValue Queue1
   
   LambdaToQueuePermission:
     Type: AWS::SQS::QueuePolicy
