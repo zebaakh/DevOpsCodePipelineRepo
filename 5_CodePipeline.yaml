@@ -138,7 +138,6 @@ Resources:
               Configuration:
                 BranchName: master
                 RepositoryName: !ImportValue DevOpsCodePipelineRepoName
-                # RepositoryName: !ImportValue DevOpsIacRepoName
               RunOrder: 1
         - Name: Build
           Actions:

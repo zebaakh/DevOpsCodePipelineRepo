@@ -11,6 +11,11 @@ Parameters:
     Type: String
     Default: ""
     Description: Name for Lambda function 2
+
+  Lambda3FunctionName:
+    Type: String
+    Default: ""
+    Description: Name for Lambda function 3
     
 
 Resources:
@@ -49,6 +54,23 @@ Resources:
           jobname: !ImportValue GlueJob
           destBucket: !ImportValue DestBucket
 
+  Lambda3:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: !Ref Lambda3FunctionName
+      Handler: lambda_function_3.lambda_handler
+      Runtime: python3.9
+      CodeUri: 
+        Bucket: 'aws-poc-cicd-glue-script'
+        Key: 'source/lambda_function_2.zip'
+      Description: 'Lambda function-2'
+      MemorySize: 128
+      Timeout: 30
+      Role: 'arn:aws:iam::971996090633:role/aws-poc-lambda-role'
+      Environment:
+        Variables:
+          destBucket: !ImportValue DestBucket
+
 Outputs:
   Lambda1:
     Description: Lambda function 1 name
@@ -61,3 +83,9 @@ Outputs:
     Value: !Ref Lambda2
     Export:
       Name: Lambda2
+
+  Lambda3:
+    Description: Lambda function3 name
+    Value: !Ref Lambda3
+    Export:
+      Name: Lambda3
