@@ -20,9 +20,6 @@ Parameters:
   S3StackName:
     Type: String
     Description: S3 stack name.
-  AccessPolicyStackName:
-    Type: String
-    Description: AccessPolicy stack name.
   GlueStackName:
     Type: String
     Description: Glue stack name.
@@ -235,25 +232,6 @@ Resources:
               TemplateConfiguration: CodeBuildArtifact::Params/lambda-param.json
              RunOrder: 4
 
-        - Name: Deploy_SqsAccessPolicy
-          Actions:
-           - Name: DeployToDev
-             ActionTypeId:
-              Category: Deploy
-              Owner: AWS
-              Version: 1
-              Provider: CloudFormation
-             InputArtifacts:
-              - Name: CodeBuildArtifact
-             Configuration:
-              ActionMode: CREATE_UPDATE
-              Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
-              RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
-              StackName: !Ref AccessPolicyStackName
-              TemplatePath: CodeBuildArtifact::Iac/sqs-accesspolicy-cfn.yaml
-              TemplateConfiguration: CodeBuildArtifact::Params/sqs-access-policy.json
-             RunOrder: 5
-
         - Name: Deploy_SourceMaping
           Actions:
            - Name: DeployToDev
@@ -270,7 +248,7 @@ Resources:
               RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
               StackName: !Ref MapingStackName
               TemplatePath: CodeBuildArtifact::Iac/event-source-maping-cfn.yaml
-             RunOrder: 6
+             RunOrder: 5
 
         - Name: Deploy_Athena
           Actions:

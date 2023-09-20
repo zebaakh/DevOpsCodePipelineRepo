@@ -4,7 +4,6 @@ phases:
     commands:
       - aws cloudformation package --template-file Iac/sqs-cfn.yaml --s3-bucket pipelineartifactbucket09072023 --output-template-file outputsqstemplate.yaml
       - aws cloudformation package --template-file Iac/s3-cfn.yaml --s3-bucket pipelineartifactbucket09072023 --output-template-file outputs3template.yaml
-      - aws cloudformation package --template-file Iac/sqs-accesspolicy-cfn.yaml --s3-bucket pipelineartifactbucket09072023 --output-template-file outputaccesspolicytemplate.yaml
       - aws cloudformation package --template-file Iac/glue-cfn.yaml --s3-bucket pipelineartifactbucket09072023 --output-template-file outputgluetemplate.yaml      
       - aws cloudformation package --template-file Iac/lambda-cfn.yaml --s3-bucket pipelineartifactbucket09072023 --output-template-file outputlambdatemplate.yaml      
       - aws cloudformation package --template-file Iac/event-source-maping-cfn.yaml --s3-bucket pipelineartifactbucket09072023 --output-template-file outputmapingtemplate.yaml      
@@ -20,10 +19,6 @@ artifacts:
     - Iac/s3-cfn.yaml
     - outputs3template.yaml
     - Params/s3-param.json
-
-    - Iac/sqs-accesspolicy-cfn.yaml
-    - outputaccesspolicytemplate.yaml
-    - Params/sqs-access-policy.json
 
     - Iac/glue-cfn.yaml
     - outputgluetemplate.yaml

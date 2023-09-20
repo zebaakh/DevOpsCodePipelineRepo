@@ -5,7 +5,6 @@
     {"ParameterKey":"RepoName","ParameterValue": "DevOpsCodePipelineRepoName"},
     {"ParameterKey":"BucketName","ParameterValue": "pipelineartifactbucket09072023"},
     {"ParameterKey":"SQSStackName","ParameterValue": "sqsqueu1stack"},
-    {"ParameterKey":"AccessPolicyStackName","ParameterValue": "accesspolicystack"},
     {"ParameterKey":"S3StackName","ParameterValue": "s3stack"},
     {"ParameterKey":"GlueStackName","ParameterValue": "gluestack"},
     {"ParameterKey":"LambdaStackName","ParameterValue": "lambdastack"},

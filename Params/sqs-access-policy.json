@@ -1,5 +1,0 @@
-{ 
-  "Parameters": {
-     "Lambda1FunctionName": "aws-poc-cicd-lambda-1"
-  }
-}
