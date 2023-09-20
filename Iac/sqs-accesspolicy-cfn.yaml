@@ -22,8 +22,8 @@ Resources:
             Resource: !ImportValue Queue1
             Condition:
               ArnLike:
-                - aws:SourceArn: !Sub 'arn:aws:s3:::${SourceBucketName}' 
-                - SourceBucketName: !ImportValue SourceBucketName
+                aws:SourceArn: !Sub 'arn:aws:s3:::${SourceBucketName}' 
+                SourceBucketName: !ImportValue SourceBucketName
       Queues:
         - !ImportValue Queue1
   
