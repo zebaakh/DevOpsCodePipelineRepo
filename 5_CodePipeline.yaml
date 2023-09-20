@@ -191,7 +191,7 @@ Resources:
               StackName: !Ref S3StackName
               TemplatePath: CodeBuildArtifact::Iac/s3-cfn.yaml
               TemplateConfiguration: CodeBuildArtifact::Params/s3-param.json
-             RunOrder: 2
+             RunOrder: 1
 
         - Name: Deploy_Glue
           Actions:
