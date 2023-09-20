@@ -28,8 +28,8 @@ Resources:
   
   LambdaToQueuePermission:
     Type: AWS::SQS::QueuePolicy
-    DependsOn:
-        - !ImportValue Queue2
+    # DependsOn:
+    #     - !ImportValue Queue2
     Properties:
       PolicyDocument:
         Version: '2012-10-17'
