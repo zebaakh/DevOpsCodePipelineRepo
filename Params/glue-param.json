@@ -4,7 +4,11 @@
      "GlueJobRoleArn": "arn:aws:iam::971996090633:role/aws-pod-internal-poc-2-access-role",
      "GlueScriptLocation": "s3://aws-poc-cicd-glue-script/source/final-glue-script.py",
      "icebergdatabaseName": "icebergdatabase",
-     "GlueTableName": "icebergtable"
+     "GlueTableName": "icebergtable",
+     "EnvironmentTag": "Developement",
+     "IcebergDBTag": "iceberg db table details",
+     "GlueTableTag": "glue table details",
+     "GlueJobTag": "glue job details"
 
   }
 }

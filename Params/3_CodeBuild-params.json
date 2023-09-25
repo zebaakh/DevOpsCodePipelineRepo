@@ -1,6 +1,14 @@
 [
-    {
+{
         "ParameterKey": "BuildProjectName",
         "ParameterValue": "DevOpsCodeBuildProject"
-    }
+},
+{
+        "ParameterKey": "EnvironmentTag",
+        "ParameterValue": "Developement"
+},
+{
+        "ParameterKey": "NameTag",
+        "ParameterValue": "Codebuild project"
+}
 ]

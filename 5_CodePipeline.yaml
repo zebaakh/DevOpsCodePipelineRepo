@@ -32,6 +32,12 @@ Parameters:
   AthenaStackName:
     Type: String
     Description: Athena stack name.
+  EnvironmentTag:
+    Type: String
+    Default: ""
+  NameTag:
+    Type: String
+    Default: ""
 
 Resources:
   CodePipelineAppRole:
@@ -124,6 +130,11 @@ Resources:
     Properties:
       Name: !Sub DevOpsCICDPipeline
       RoleArn: !GetAtt [ CodePipelineAppRole, Arn ]
+      Tags: 
+        - Key: Environment
+          Value: !Ref EnvironmentTag
+        - Key: Name
+          Value: !Ref NameTag
       Stages:
         - Name: Source
           Actions:

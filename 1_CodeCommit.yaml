@@ -6,12 +6,24 @@ Parameters:
     Type: String
     Description: Name of CodeCommit Repo
     Default: ""
-
+  EnvironmentTag:
+    Type: String
+    Default: ""
+  NameTag:
+    Type: String
+    Default: ""
+    
 Resources:
   DevOpsCodePipelineRepo:
     Type: AWS::CodeCommit::Repository
     Properties:
       RepositoryName: !Ref RepoName  
+      Tags: 
+        - Key: Environment
+          Value: !Ref EnvironmentTag
+        - Key: Name
+          Value: !Ref NameTag
+
 
 Outputs:
   DevOpsCodePipelineRepoName: 

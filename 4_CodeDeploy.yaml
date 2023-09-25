@@ -6,6 +6,12 @@ Parameters:
     Type: String
     Description: Name of CodeDeploy App
     Default: ""
+  EnvironmentTag:
+    Type: String
+    Default: ""
+  NameTag:
+    Type: String
+    Default: ""
 
 Resources:
   CodeDeployApp:
@@ -13,6 +19,11 @@ Resources:
     Properties: 
       ApplicationName: !Ref CodeDeployAppName
       ComputePlatform: Server
+      Tags: 
+        - Key: Environment
+          Value: !Ref EnvironmentTag
+        - Key: Name
+          Value: !Ref NameTag
 
   CodeDeployDevDeploymentGroup: 
     Type: AWS::CodeDeploy::DeploymentGroup

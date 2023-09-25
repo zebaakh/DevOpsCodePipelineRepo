@@ -2,5 +2,13 @@
 {
         "ParameterKey": "RepoName",
         "ParameterValue": "DevOpsCodePipelineRepo"
+},
+{
+        "ParameterKey": "EnvironmentTag",
+        "ParameterValue": "Developement"
+},
+{
+        "ParameterKey": "NameTag",
+        "ParameterValue": "Code commit repo"
 }
 ]

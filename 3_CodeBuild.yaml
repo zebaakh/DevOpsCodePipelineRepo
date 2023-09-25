@@ -6,7 +6,12 @@ Parameters:
     Type: String
     Description: Name of CodeBuild Project
     Default: ""
-
+  EnvironmentTag:
+    Type: String
+    Default: ""
+  NameTag:
+    Type: String
+    Default: ""
 Resources:
   DevOpsCodeBuildProject:
     Type: AWS::CodeBuild::Project
@@ -28,6 +33,11 @@ Resources:
           - DevOpsCodePipelineRepoName: !ImportValue DevOpsCodePipelineRepoName
         Type: CODECOMMIT
       TimeoutInMinutes: 15
+      Tags: 
+        - Key: Environment
+          Value: !Ref EnvironmentTag
+        - Key: Name
+          Value: !Ref NameTag
 
   DevOpsCodeBuildRole:
     Type: "AWS::IAM::Role"

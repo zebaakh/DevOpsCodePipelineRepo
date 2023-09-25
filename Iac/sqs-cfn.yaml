@@ -21,17 +21,38 @@ Parameters:
     Type: String
     Default: ""
     Description: Name for source bucket
+  EnvironmentTag:
+    Type: String
+    Default: ""
+  Queue1Tag:
+    Type: String
+    Default: ""
+  Queue2Tag:
+    Type: String
+    Default: ""
 
 Resources:
   Queue1:
     Type: AWS::SQS::Queue
     Properties: 
       QueueName: !Ref Queue1Name
+      Tags: 
+        - Key: Environment
+          Value: !Ref EnvironmentTag
+        - Key: Name
+          Value: !Ref Queue1Tag
+
 
   Queue2:
     Type: AWS::SQS::Queue
     Properties: 
       QueueName: !Ref Queue2Name
+      Tags: 
+        - Key: Environment
+          Value: !Ref EnvironmentTag
+        - Key: Name
+          Value: !Ref Queue2Tag
+
 
   LambdaToQueuePermission:
     Type: AWS::SQS::QueuePolicy

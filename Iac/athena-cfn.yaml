@@ -5,6 +5,12 @@ Parameters:
     Type: String
     Default: ""
     Description: Name for Athena workgroup
+  EnvironmentTag:
+    Type: String
+    Default: ""
+  NameTag:
+    Type: String
+    Default: ""
 
 Resources:
   AthenaWorkGroup:
@@ -16,7 +22,11 @@ Resources:
           OutputLocation: !Sub 
                           - 's3://${MetadataBucketName}/'
                           - MetadataBucketName: !ImportValue MetadataBucketName
-
+      Tags: 
+        - Key: Environment
+          Value: !Ref EnvironmentTag
+        - Key: Name
+          Value: !Ref NameTag
 Outputs:
   AthenaWorkGroupName:
     Description: Athena work group name

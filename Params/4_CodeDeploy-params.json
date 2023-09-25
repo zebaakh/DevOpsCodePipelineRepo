@@ -1,6 +1,14 @@
 [
-    {
+{
         "ParameterKey": "CodeDeployAppName",
         "ParameterValue": "CodeDeployApplication"
-    }
+},
+{
+        "ParameterKey": "EnvironmentTag",
+        "ParameterValue": "Developement"
+},
+{
+        "ParameterKey": "NameTag",
+        "ParameterValue": "CodeDeploy App"
+}
 ]

@@ -1,6 +1,14 @@
 [
-    {
+{
         "ParameterKey": "Email",
         "ParameterValue": "CICDPipeline"
-    }
+},
+{
+        "ParameterKey": "EnvironmentTag",
+        "ParameterValue": "Developement"
+},
+{
+        "ParameterKey": "NameTag",
+        "ParameterValue": "CICD Codepipeline"
+}
 ]
