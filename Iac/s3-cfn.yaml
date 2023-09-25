@@ -24,18 +24,32 @@ Resources:
       NotificationConfiguration:
         QueueConfigurations:
           - Event: s3:ObjectCreated:*
-            Queue: !ImportValue Queue1Arn
-      
+            Queue: !ImportValue Queue1Arn    
+      Tags: 
+        - Key: Environment
+          Value: Development
+        - Key: Name
+          Value: Src:InputFiles
+
   DestBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Ref DestinationBucketName
+      Tags: 
+        - Key: Environment
+          Value: Development
+        - Key: Name
+          Value: Dest:OutputFiles
   
   MetadataBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
       BucketName: !Ref MetadataBucketName
-
+      Tags: 
+        - Key: Environment
+          Value: Development
+        - Key: Name
+          Value: MetadataFiles
 Outputs:
   SourceBucketName:
     Description: Source bucket name

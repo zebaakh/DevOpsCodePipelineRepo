@@ -14,6 +14,11 @@ Resources:
       BucketName: !Ref BucketName
       VersioningConfiguration:
         Status: Enabled
+      Tags: 
+        - Key: Environment
+          Value: Development
+        - Key: Name
+          Value: Pipeline Artifact Bucket
 
 Outputs:
   PipelineArtifactBucket:
