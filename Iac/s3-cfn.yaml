@@ -15,7 +15,23 @@ Parameters:
     Description: Type of this BacketName.
     Type: String
     Default: ""
+  
+  EnvironmentTag:
+    Type: String
+    Default: ""
 
+  SrcNameTag:
+    Type: String
+    Default: ""
+
+  DestNameTag:
+    Type: String
+    Default: ""
+
+  MetaNameTag:
+    Type: String
+    Default: ""
+    
 Resources:
   SrcBucket:
     Type: AWS::S3::Bucket
@@ -27,9 +43,9 @@ Resources:
             Queue: !ImportValue Queue1Arn    
       Tags: 
         - Key: Environment
-          Value: Development
+          Value: !Ref EnvironmentTag
         - Key: Name
-          Value: Src:InputFiles
+          Value: !Ref SrcNameTag
 
   DestBucket:
     Type: AWS::S3::Bucket
@@ -37,9 +53,9 @@ Resources:
       BucketName: !Ref DestinationBucketName
       Tags: 
         - Key: Environment
-          Value: Development
+          Value: !Ref EnvironmentTag
         - Key: Name
-          Value: Dest:OutputFiles
+          Value: !Ref DestNameTag
   
   MetadataBucket:
     Type: 'AWS::S3::Bucket'
@@ -47,9 +63,9 @@ Resources:
       BucketName: !Ref MetadataBucketName
       Tags: 
         - Key: Environment
-          Value: Development
+          Value: !Ref EnvironmentTag
         - Key: Name
-          Value: MetadataFiles
+          Value: !Ref MetaNameTag
 Outputs:
   SourceBucketName:
     Description: Source bucket name

@@ -2,5 +2,14 @@
 {
         "ParameterKey": "BucketName",
         "ParameterValue": "pipelineartifactbucket09072023"
+},
+{
+        "ParameterKey": "EnvironmentTag",
+        "ParameterValue": "Developement"
+},
+{
+        "ParameterKey": "NameTag",
+        "ParameterValue": "Pipeline Artifact Bucket"
+
 }
 ]

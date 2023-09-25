@@ -6,6 +6,14 @@ Parameters:
     Type: String
     Description: S3 Bucket Name
     Default: ""
+  EnvironmentTag:
+    Type: String
+    Default: ""
+  NameTag:
+    Type: String
+    Default: ""
+    
+
 
 Resources:
   S3Bucket:
@@ -16,9 +24,9 @@ Resources:
         Status: Enabled
       Tags: 
         - Key: Environment
-          Value: Development
+          Value: !Ref EnvironmentTag
         - Key: Name
-          Value: Pipeline Artifact Bucket
+          Value: !Ref NameTag
 
 Outputs:
   PipelineArtifactBucket:
