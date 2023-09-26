@@ -21,18 +21,18 @@ Parameters:
     Type: String
     Default: ""
     Description: GlueScriptLocation details
-  EnvironmentTag:
-    Type: String
-    Default: ""
+  # EnvironmentTag:
+  #   Type: String
+  #   Default: ""
   # IcebergDBTag:
   #   Type: String
   #   Default: ""
   # GlueTableTag:
   #   Type: String
   #   Default: ""
-  GlueJobTag:
-    Type: String
-    Default: ""
+  # GlueJobTag:
+  #   Type: String
+  #   Default: ""
 
 Resources:
   icebergdatabase:
@@ -99,9 +99,9 @@ Resources:
       MaxRetries: 0
       Name: !Ref GlueJobName
       Role: !Ref GlueJobRoleArn
-      Tags: 
-        Environment: !Ref EnvironmentTag
-        Name: !Ref GlueJobTag
+      # Tags: 
+      #   Environment: !Ref EnvironmentTag
+      #   Name: !Ref GlueJobTag
 
 Outputs:
   GlueJob:
