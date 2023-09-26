@@ -183,8 +183,6 @@ Resources:
               StackName: !Ref SQSStackName
               TemplatePath: CodeBuildArtifact::Iac/sqs-cfn.yaml
               TemplateConfiguration: CodeBuildArtifact::Params/sqs-param.json
-            #  RoleArn: !Sub arn:aws:iam::932184789785:role/CrossAccount-A-B-Role
-            #  RoleArn: !Sub arn:aws:iam::932184789785:role/CloudformationStackServiceDeployRole
              RunOrder: 1
 
         - Name: Deploy_S3
