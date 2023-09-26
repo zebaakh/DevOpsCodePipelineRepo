@@ -43,7 +43,7 @@ Resources:
       CatalogId:
         Ref: AWS::AccountId
       Tags: 
-        Key: !Ref EnvironmentTag
+        Environment: !Ref EnvironmentTag
         Name: !Ref IcebergDBTag
   
   GlueTable:
@@ -78,10 +78,9 @@ Resources:
             SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
           StoredAsSubDirectories: false
       Tags: 
-        - Key: Environment
-          Value: !Ref EnvironmentTag
-        - Key: Name
-          Value: !Ref GlueTableTag
+        Environment: !Ref EnvironmentTag
+        Name: !Ref GlueTableTag
+
   GlueJob:
     Type: AWS::Glue::Job
     Properties:
@@ -101,7 +100,7 @@ Resources:
       Name: !Ref GlueJobName
       Role: !Ref GlueJobRoleArn
       Tags: 
-        Key: !Ref EnvironmentTag
+        Environment: !Ref EnvironmentTag
         Name: !Ref GlueJobTag
 
 Outputs:
