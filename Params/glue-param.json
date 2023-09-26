@@ -6,9 +6,9 @@
      "icebergdatabaseName": "icebergdatabase",
      "GlueTableName": "icebergtable",
      "EnvironmentTag": "Developement",
-    //  "IcebergDBTag": "iceberg db table details",
+     "IcebergDBTag": "iceberg db table details",
      "GlueTableTag": "glue table details",
-    //  "GlueJobTag": "glue job details"
+     "GlueJobTag": "glue job details"
 
   }
 }
