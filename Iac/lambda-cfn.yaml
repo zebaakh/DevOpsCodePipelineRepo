@@ -95,7 +95,7 @@ Resources:
         - Key: Environment
           Value: !Ref EnvironmentTag
         - Key: Name
-          Value: !Ref Lambda3Tag
+          # Value: !Ref Lambda3Tag
 
 Outputs:
   Lambda1:
