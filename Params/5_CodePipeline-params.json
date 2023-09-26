@@ -1,6 +1,6 @@
 [
 {
-        "ParameterKey": "Email",
+        "ParameterKey": "NameOfPipeline",
         "ParameterValue": "CICDPipeline"
 },
 {
