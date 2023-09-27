@@ -6,28 +6,26 @@ Parameters:
     Type: String
     Default: ""
     Description: Name for Lambda function 1
-
   Lambda2FunctionName:
     Type: String
     Default: ""
     Description: Name for Lambda function 2
-
   Lambda3FunctionName:
     Type: String
     Default: ""
     Description: Name for Lambda function 3
-  # EnvironmentTag:
-  #   Type: String
-  #   Default: ""
-  # Lambda1Tag:
-  #   Type: String
-  #   Default: ""
-  # Lambda2Tag:
-  #   Type: String
-  #   Default: ""
-  # Lambda3Tag:
-  #   Type: String
-  #   Default: ""
+  EnvironmentTag:
+    Type: String
+    Default: ""
+  Lambda1Tag:
+    Type: String
+    Default: ""
+  Lambda2Tag:
+    Type: String
+    Default: ""
+  Lambda3Tag:
+    Type: String
+    Default: ""
 
 Resources:
   Lambda1:
@@ -46,11 +44,11 @@ Resources:
       Environment:
         Variables:
           Queue2url: !ImportValue Queue2 
-      # Tags: 
-      #   - Key: Environment
-      #     Value: !Ref EnvironmentTag
-      #   - Key: Name
-      #     Value: !Ref Lambda1Tag
+      Tags: 
+        - Key: Environment
+          Value: !Ref EnvironmentTag
+        - Key: Name
+          Value: !Ref Lambda1Tag
 
   Lambda2:
     Type: 'AWS::Serverless::Function'
@@ -69,11 +67,11 @@ Resources:
         Variables:
           jobname: !ImportValue GlueJob
           destBucket: !ImportValue DestBucket
-      # Tags: 
-      #   - Key: Environment
-      #     Value: !Ref EnvironmentTag
-      #   - Key: Name
-      #     Value: !Ref Lambda2Tag
+      Tags: 
+        - Key: Environment
+          Value: !Ref EnvironmentTag
+        - Key: Name
+          Value: !Ref Lambda2Tag`
 
   Lambda3:
     Type: 'AWS::Serverless::Function'
@@ -91,11 +89,11 @@ Resources:
       Environment:
         Variables:
           destBucket: !ImportValue DestBucket
-      # Tags: 
-      #   - Key: Environment
-      #     Value: !Ref EnvironmentTag
-      #   - Key: Name
-      #     Value: !Ref Lambda3Tag
+      Tags: 
+        - Key: Environment
+          Value: !Ref EnvironmentTag
+        - Key: Name
+          Value: !Ref Lambda3Tag
 
 Outputs:
   Lambda1:
