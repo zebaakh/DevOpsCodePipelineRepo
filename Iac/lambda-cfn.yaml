@@ -17,15 +17,15 @@ Parameters:
   EnvironmentTag:
     Type: String
     Default: ""
-  Lambda1Tag:
+  LambdaTag:
     Type: String
     Default: ""
-  Lambda2Tag:
-    Type: String
-    Default: ""
-  Lambda3Tag:
-    Type: String
-    Default: ""
+  # Lambda2Tag:
+  #   Type: String
+  #   Default: ""
+  # Lambda3Tag:
+  #   Type: String
+  #   Default: ""
 
 Resources:
   Lambda1:
@@ -48,7 +48,7 @@ Resources:
         - Key: Environment
           Value: !Ref EnvironmentTag
         - Key: Name
-          Value: !Ref Lambda1Tag
+          Value: !Ref LambdaTag
 
   Lambda2:
     Type: 'AWS::Serverless::Function'
@@ -67,11 +67,11 @@ Resources:
         Variables:
           jobname: !ImportValue GlueJob
           destBucket: !ImportValue DestBucket
-      Tags: 
-        - Key: Environment
-          Value: !Ref EnvironmentTag
-        - Key: Name
-          Value: !Ref Lambda2Tag`
+      # Tags: 
+      #   - Key: Environment
+      #     Value: !Ref EnvironmentTag
+      #   - Key: Name
+      #     Value: !Ref Lambda2Tag
 
   Lambda3:
     Type: 'AWS::Serverless::Function'
@@ -89,11 +89,11 @@ Resources:
       Environment:
         Variables:
           destBucket: !ImportValue DestBucket
-      Tags: 
-        - Key: Environment
-          Value: !Ref EnvironmentTag
-        - Key: Name
-          Value: !Ref Lambda3Tag
+      # Tags: 
+      #   - Key: Environment
+      #     Value: !Ref EnvironmentTag
+      #   - Key: Name
+      #     Value: !Ref Lambda3Tag
 
 Outputs:
   Lambda1:

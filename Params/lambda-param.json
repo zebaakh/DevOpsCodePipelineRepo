@@ -5,9 +5,7 @@
      "Lambda3FunctionName": "aws-poc-cicd-lambda-3",
      "Lambda3FunctionName": "aws-poc-cicd-lambda-3",
      "EnvironmentTag": "Developement",
-     "Lambda1Tag": "Lambda 1 function",
-     "Lambda2Tag": "Lambda 2 function",
-     "Lambda3Tag": "Lambda 3 function"
+     "LambdaTag": "Lambda 1 function"
      
   }
 }
