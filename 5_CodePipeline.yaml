@@ -202,7 +202,7 @@ Resources:
               StackName: !Ref S3StackName
               TemplatePath: CodeBuildArtifact::Iac/s3-cfn.yaml
               TemplateConfiguration: CodeBuildArtifact::Params/s3-param.json
-             RunOrder: 1
+             RunOrder: 2
 
         - Name: Deploy_Glue
           Actions:
@@ -277,7 +277,7 @@ Resources:
               StackName: !Ref AthenaStackName
               TemplatePath: CodeBuildArtifact::Iac/athena-cfn.yaml
               TemplateConfiguration: CodeBuildArtifact::Params/athena-param.json
-             RunOrder: 7                
+             RunOrder: 6                
 
             # - Name: ManualApproval
             #   # :Actions

@@ -44,8 +44,8 @@ Resources:
       Environment:
         Variables:
           Queue2url: !ImportValue Queue2 
-      Tags: 
-        "Environment": "Development"
+      # Tags: 
+      #   "Environment": "Development"
 
   Lambda2:
     Type: 'AWS::Serverless::Function'
