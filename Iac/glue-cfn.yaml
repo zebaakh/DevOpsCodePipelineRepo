@@ -27,12 +27,6 @@ Parameters:
   GlueJobTag:
     Type: String
     Default: ""
-  IcebergDbTag:
-    Type: String
-    Default: ""
-  GlueTableTag:
-    Type: String
-    Default: ""
   
 Resources:
   icebergdatabase:
@@ -42,9 +36,6 @@ Resources:
         Name: !Ref icebergdatabaseName
       CatalogId:
         Ref: AWS::AccountId
-      Tags: 
-        Environment: !Ref EnvironmentTag
-        Name: !Ref IcebergDbTag
   
   GlueTable:
     Type: AWS::Glue::Table
@@ -77,9 +68,6 @@ Resources:
           SerdeInfo:
             SerializationLibrary: org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe
           StoredAsSubDirectories: false
-      Tags: 
-        Environment: !Ref EnvironmentTag
-        Name: !Ref GlueTableTag
       
   GlueJob:
     Type: AWS::Glue::Job
