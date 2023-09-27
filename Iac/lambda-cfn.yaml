@@ -45,10 +45,8 @@ Resources:
         Variables:
           Queue2url: !ImportValue Queue2 
       Tags: 
-        - Key: Environment
-          Value: !Ref EnvironmentTag
-        - Key: Name
-          Value: !Ref Lambda1Tag
+        Environment: !Ref EnvironmentTag
+        Name: !Ref Lambda1Tag
 
   Lambda2:
     Type: 'AWS::Serverless::Function'
@@ -68,10 +66,8 @@ Resources:
           jobname: !ImportValue GlueJob
           destBucket: !ImportValue DestBucket
       Tags: 
-        - Key: Environment
-          Value: !Ref EnvironmentTag
-        - Key: Name
-          Value: !Ref Lambda2Tag
+        Environment: !Ref EnvironmentTag
+        Name: !Ref Lambda2Tag
 
   Lambda3:
     Type: 'AWS::Serverless::Function'
@@ -90,10 +86,8 @@ Resources:
         Variables:
           destBucket: !ImportValue DestBucket
       Tags: 
-        - Key: Environment
-          Value: !Ref EnvironmentTag
-        - Key: Name
-          Value: !Ref Lambda3Tag
+        Environment: !Ref EnvironmentTag
+        Name: !Ref Lambda3Tag
 
 Outputs:
   Lambda1:
