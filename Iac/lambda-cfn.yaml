@@ -14,12 +14,12 @@ Parameters:
     Type: String
     Default: ""
     Description: Name for Lambda function 3
-  EnvironmentTag:
-    Type: String
-    Default: ""
-  LambdaTag:
-    Type: String
-    Default: ""
+  # EnvironmentTag:
+  #   Type: String
+  #   Default: ""
+  # LambdaTag:
+  #   Type: String
+  #   Default: ""
   # Lambda2Tag:
   #   Type: String
   #   Default: ""
@@ -45,10 +45,7 @@ Resources:
         Variables:
           Queue2url: !ImportValue Queue2 
       Tags: 
-        - Key: Environment
-          Value: !Ref EnvironmentTag
-        - Key: Name
-          Value: !Ref LambdaTag
+        "Environment": "Development"
 
   Lambda2:
     Type: 'AWS::Serverless::Function'
