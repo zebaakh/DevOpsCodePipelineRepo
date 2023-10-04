@@ -277,7 +277,7 @@ Resources:
               StackName: !Ref AthenaStackName
               TemplatePath: CodeBuildArtifact::Iac/athena-cfn.yaml
               TemplateConfiguration: CodeBuildArtifact::Params/athena-param.json
-             RunOrder: 6                
+             RunOrder: 5              
 
             # - Name: ManualApproval
             #   # :Actions
