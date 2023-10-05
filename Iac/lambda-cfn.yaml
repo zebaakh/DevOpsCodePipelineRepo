@@ -45,7 +45,7 @@ Resources:
       MemorySize: 128
       Timeout: 30
       # Role: 'arn:aws:iam::971996090633:role/aws-poc-lambda-role'
-      Role: !Sub arn:aws:iam::${AccIdBdcpractice}:role/aws-poc-lambda-role
+      Role: !Sub 'arn:aws:iam::${AccIdBdcpractice}:role/aws-poc-lambda-role'
 
       Environment:
         Variables:
@@ -68,7 +68,7 @@ Resources:
       MemorySize: 128
       Timeout: 30
       # Role: 'arn:aws:iam::971996090633:role/aws-poc-lambda-role'
-      Role: !Sub arn:aws:iam::${AccIdBdcpractice}:role/aws-poc-lambda-role
+      Role: !Sub 'arn:aws:iam::${AccIdBdcpractice}:role/aws-poc-lambda-role'
       Environment:
         Variables:
           jobname: !ImportValue GlueJob
@@ -90,7 +90,7 @@ Resources:
       MemorySize: 128
       Timeout: 30
       # Role: 'arn:aws:iam::971996090633:role/aws-poc-lambda-role'
-      Role: !Sub arn:aws:iam::${AccIdBdcpractice}:role/aws-poc-lambda-role
+      Role: !Sub 'arn:aws:iam::${AccIdBdcpractice}:role/aws-poc-lambda-role'
       Environment:
         Variables:
           destBucket: !ImportValue DestBucket
