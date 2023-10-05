@@ -27,6 +27,10 @@ Parameters:
   GlueJobTag:
     Type: String
     Default: ""
+  AccId: 
+    Type: String
+    Default: ""
+
   
 Resources:
   icebergdatabase:
@@ -86,7 +90,8 @@ Resources:
         MaxConcurrentRuns: 1
       MaxRetries: 0
       Name: !Ref GlueJobName
-      Role: !Ref GlueJobRoleArn
+      #Role: !Ref GlueJobRoleArn
+      Role: !Sub 'arn:aws:iam::${AccId}:role/aws-pod-internal-poc-2-access-role'
       Tags: 
         Environment: !Ref EnvironmentTag
         Name: !Ref GlueJobTag

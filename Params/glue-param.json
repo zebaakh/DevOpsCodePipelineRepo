@@ -1,11 +1,11 @@
 { 
   "Parameters": {
      "GlueJobName": "aws-poc-cicd-glue-job",
-     "GlueJobRoleArn": "arn:aws:iam::971996090633:role/aws-pod-internal-poc-2-access-role",
      "GlueScriptLocation": "s3://aws-poc-cicd-glue-script/source/final-glue-script.py",
      "icebergdatabaseName": "icebergdatabase",
      "GlueTableName": "icebergtable",
      "EnvironmentTag": "Developement",
-     "GlueJobTag": "My Glue Job"    
+     "GlueJobTag": "My Glue Job",  
+     "AccId": "971996090633"
   }
 }
