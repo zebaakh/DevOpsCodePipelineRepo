@@ -103,11 +103,11 @@ Outputs:
     Export:
       Name: GlueJob 
 
-  GlueJobRoleArn:
-    Description: glue job role arn
-    Value: !Ref GlueJobRoleArn
-    Export:
-      Name: GlueJobRoleArn
+  # GlueJobRoleArn:
+  #   Description: glue job role arn
+  #   Value: !Ref GlueJobRoleArn
+  #   Export:
+  #     Name: GlueJobRoleArn
 
   GlueScriptLocation:
     Description: glue script path
