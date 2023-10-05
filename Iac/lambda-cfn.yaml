@@ -35,8 +35,8 @@ Resources:
       Handler: lambda_function_1.lambda_handler
       Runtime: python3.9
       CodeUri: 
-        Bucket: 'aws-poc-cicd-glue-script'
-        Key: 'source/lambda_function_1.zip'       
+        Bucket: !ImportValue PipelineArtifactBucket
+        Key: 'Source/lambda_function_1.zip'       
       Description: 'Lambda function-1'
       MemorySize: 128
       Timeout: 30
