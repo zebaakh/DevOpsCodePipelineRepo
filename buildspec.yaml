@@ -10,9 +10,9 @@ phases:
       - aws cloudformation package --template-file Iac/athena-cfn.yaml --s3-bucket pipelineartifactbucket09072023 --output-template-file outputathenatemplate.yaml
       - zip -r lambda_function_1.zip lambda_function_1.py
       - aws s3 cp lambda_function_1.zip s3://pipelineartifactbucket09072023/Source/
-      - zip -r lambda_function_2.zip lambda_function_1.py
+      - zip -r lambda_function_2.zip lambda_function_2.py
       - aws s3 cp lambda_function_2.zip s3://pipelineartifactbucket09072023/Source/
-      - zip -r lambda_function_3.zip lambda_function_1.py
+      - zip -r lambda_function_3.zip lambda_function_3.py
       - aws s3 cp lambda_function_3.zip s3://pipelineartifactbucket09072023/Source/
 artifacts:
   type: zip
