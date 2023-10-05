@@ -40,6 +40,6 @@ artifacts:
     - outputathenatemplate.yaml
     - Params/athena-param.json
 
-    # - lambda_function_1.zip
-    # - lambda_function_2.zip
-    # - lambda_function_3.zip
+    - lambda_function_1.zip
+    - lambda_function_2.zip
+    - lambda_function_3.zip
