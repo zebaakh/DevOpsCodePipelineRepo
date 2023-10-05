@@ -38,6 +38,9 @@ Parameters:
   NameTag:
     Type: String
     Default: ""
+  AccIdBdcpractice:
+    Type: String
+    Description: Acc Id of bdc
 
 Resources:
   CodePipelineAppRole:
@@ -123,7 +126,8 @@ Resources:
                 Action:
                   - "iam:PassRole"
                 Resource:
-                  - arn:aws:iam::971996090633:role/cicdpipelineCFrole
+                  # - arn:aws:iam::971996090633:role/cicdpipelineCFrole
+                  - arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
 
   CodePipeline:
     Type: "AWS::CodePipeline::Pipeline"
@@ -179,7 +183,8 @@ Resources:
              Configuration:
               ActionMode: CREATE_UPDATE
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
-              RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
+              # RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
+              RoleArn: !Sub arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
               StackName: !Ref SQSStackName
               TemplatePath: CodeBuildArtifact::Iac/sqs-cfn.yaml
               TemplateConfiguration: CodeBuildArtifact::Params/sqs-param.json
@@ -198,7 +203,8 @@ Resources:
              Configuration:
               ActionMode: CREATE_UPDATE
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
-              RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
+              # RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
+              RoleArn: !Sub arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
               StackName: !Ref S3StackName
               TemplatePath: CodeBuildArtifact::Iac/s3-cfn.yaml
               TemplateConfiguration: CodeBuildArtifact::Params/s3-param.json
@@ -217,7 +223,8 @@ Resources:
              Configuration:
               ActionMode: CREATE_UPDATE
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
-              RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
+              # RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
+              RoleArn: !Sub arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
               StackName: !Ref GlueStackName
               TemplatePath: CodeBuildArtifact::Iac/glue-cfn.yaml
               TemplateConfiguration: CodeBuildArtifact::Params/glue-param.json
@@ -236,7 +243,8 @@ Resources:
              Configuration:
               ActionMode: CREATE_UPDATE
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
-              RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
+              # RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
+              RoleArn: !Sub arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
               StackName: !Ref LambdaStackName
               TemplatePath: CodeBuildArtifact::Iac/lambda-cfn.yaml
               TemplateConfiguration: CodeBuildArtifact::Params/lambda-param.json
@@ -255,7 +263,8 @@ Resources:
              Configuration:
               ActionMode: CREATE_UPDATE
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
-              RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
+              # RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
+              RoleArn: !Sub arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
               StackName: !Ref MapingStackName
               TemplatePath: CodeBuildArtifact::Iac/event-source-maping-cfn.yaml
              RunOrder: 5
@@ -273,7 +282,8 @@ Resources:
              Configuration:
               ActionMode: CREATE_UPDATE
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
-              RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
+              # RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
+              RoleArn: !Sub arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
               StackName: !Ref AthenaStackName
               TemplatePath: CodeBuildArtifact::Iac/athena-cfn.yaml
               TemplateConfiguration: CodeBuildArtifact::Params/athena-param.json

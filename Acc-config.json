@@ -9,7 +9,8 @@
     {"ParameterKey":"GlueStackName","ParameterValue": "gluestack"},
     {"ParameterKey":"LambdaStackName","ParameterValue": "lambdastack"},
     {"ParameterKey":"MapingStackName","ParameterValue": "mapingstack"},
-    {"ParameterKey":"AthenaStackName","ParameterValue": "athenastack"}
+    {"ParameterKey":"AthenaStackName","ParameterValue": "athenastack"},
+    {"ParameterKey":"AccIdBdcpractice","ParameterValue": "971996090633"}
 
 ]
 
