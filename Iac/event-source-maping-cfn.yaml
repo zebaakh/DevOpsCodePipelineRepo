@@ -13,8 +13,8 @@ Resources:
       EventSourceArn: !ImportValue Queue2Arn
       FunctionName: !ImportValue Lambda2
 
-  Queue2ToLambda3EventSourceMapping:
-    Type: 'AWS::Lambda::EventSourceMapping'
-    Properties:
-      EventSourceArn: !ImportValue Queue2Arn
-      FunctionName: !ImportValue Lambda3
+  # Queue2ToLambda3EventSourceMapping:
+  #   Type: 'AWS::Lambda::EventSourceMapping'
+  #   Properties:
+  #     EventSourceArn: !ImportValue Queue2Arn
+  #     FunctionName: !ImportValue Lambda3
