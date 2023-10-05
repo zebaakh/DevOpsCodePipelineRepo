@@ -26,6 +26,9 @@ Parameters:
   Lambda3Tag:
     Type: String
     Default: ""
+  AccIdBdcpractice:
+    Type: String
+    Description: Acc Id of bdc
 
 Resources:
   Lambda1:
