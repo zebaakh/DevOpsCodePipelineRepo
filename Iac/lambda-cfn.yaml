@@ -28,6 +28,7 @@ Parameters:
     Default: ""
   AccIdBdcpractice:
     Type: String
+    Default: ""
     Description: Acc Id of bdc
 
 Resources:
