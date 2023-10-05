@@ -127,7 +127,7 @@ Resources:
                   - "iam:PassRole"
                 Resource:
                   # - arn:aws:iam::971996090633:role/cicdpipelineCFrole
-                  - arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
+                  - !Sub arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
 
   CodePipeline:
     Type: "AWS::CodePipeline::Pipeline"
