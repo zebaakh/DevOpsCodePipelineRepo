@@ -8,6 +8,8 @@ phases:
       - aws cloudformation package --template-file Iac/lambda-cfn.yaml --s3-bucket pipelineartifactbucket09072023 --output-template-file outputlambdatemplate.yaml      
       - aws cloudformation package --template-file Iac/event-source-maping-cfn.yaml --s3-bucket pipelineartifactbucket09072023 --output-template-file outputmapingtemplate.yaml      
       - aws cloudformation package --template-file Iac/athena-cfn.yaml --s3-bucket pipelineartifactbucket09072023 --output-template-file outputathenatemplate.yaml
+      - zip -r lambda_function_1.zip lambda_function_1.py
+      - aws s3 cp lambda_function_1.zip s3://pipelineartifactbucket09072023/Source/lambda_function_1.zip
 
 artifacts:
   type: zip
@@ -34,3 +36,5 @@ artifacts:
     - Iac/athena-cfn.yaml
     - outputathenatemplate.yaml
     - Params/athena-param.json
+
+    - lambda_function_1.zip
