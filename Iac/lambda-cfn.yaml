@@ -40,7 +40,7 @@ Resources:
       Runtime: python3.9
       CodeUri: 
         Bucket: !ImportValue PipelineArtifactBucket
-        Key: 'Source/lambda_function_2.zip'       
+        Key: 'Source/lambda_function_1.zip'       
       Description: 'Lambda function-1'
       MemorySize: 128
       Timeout: 30
