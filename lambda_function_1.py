@@ -28,7 +28,7 @@ def lambda_handler(event, context):
             
             if file_size < 1024:  # Check if the file size is less than 10KB
 
-                lambda_function_name = "aws-poc-lambda-4"
+                # lambda_function_name = "aws-poc-lambda-4"
 
                 payload = {
      
@@ -41,7 +41,7 @@ def lambda_handler(event, context):
     
                 lambda_client.invoke(
         
-                  FunctionName=lambda_function_name,
+                  FunctionName=os.environ["Lambda3Name"],
         
                   InvocationType='Event',  # Asynchronous invocation
         
