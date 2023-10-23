@@ -1,13 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: Template to create CodePipeline with associated rules and Policies
+Description: Template to create CodePipeline with associated rules and Policies and deploye services
 
-Parameters:
-  TeamName:
-    Type: String
-    Description: Name of the Team
-  ApplicationName:
-    Type: String
-    Description: Name of the Application 
+Parameters: 
   RepoName:
     Type: String
     Description: Name of the CodeCommit Repo
@@ -183,7 +177,6 @@ Resources:
              Configuration:
               ActionMode: CREATE_UPDATE
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
-              # RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
               RoleArn: !Sub arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
               StackName: !Ref SQSStackName
               TemplatePath: CodeBuildArtifact::Iac/sqs-cfn.yaml
@@ -203,7 +196,6 @@ Resources:
              Configuration:
               ActionMode: CREATE_UPDATE
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
-              # RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
               RoleArn: !Sub arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
               StackName: !Ref S3StackName
               TemplatePath: CodeBuildArtifact::Iac/s3-cfn.yaml
@@ -223,7 +215,6 @@ Resources:
              Configuration:
               ActionMode: CREATE_UPDATE
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
-              # RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
               RoleArn: !Sub arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
               StackName: !Ref GlueStackName
               TemplatePath: CodeBuildArtifact::Iac/glue-cfn.yaml
@@ -243,7 +234,6 @@ Resources:
              Configuration:
               ActionMode: CREATE_UPDATE
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
-              # RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
               RoleArn: !Sub arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
               StackName: !Ref LambdaStackName
               TemplatePath: CodeBuildArtifact::Iac/lambda-cfn.yaml
@@ -263,7 +253,6 @@ Resources:
              Configuration:
               ActionMode: CREATE_UPDATE
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
-              # RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
               RoleArn: !Sub arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
               StackName: !Ref MapingStackName
               TemplatePath: CodeBuildArtifact::Iac/event-source-maping-cfn.yaml
@@ -282,25 +271,11 @@ Resources:
              Configuration:
               ActionMode: CREATE_UPDATE
               Capabilities: CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND
-              # RoleArn: !Sub arn:aws:iam::971996090633:role/cicdpipelineCFrole
               RoleArn: !Sub arn:aws:iam::${AccIdBdcpractice}:role/cicdpipelineCFrole
               StackName: !Ref AthenaStackName
               TemplatePath: CodeBuildArtifact::Iac/athena-cfn.yaml
               TemplateConfiguration: CodeBuildArtifact::Params/athena-param.json
              RunOrder: 5              
-
-            # - Name: ManualApproval
-            #   # :Actions
-            #   #  - Name: ManualApproval
-            #   ActionTypeId:
-            #     Category: Approval
-            #     Owner: AWS
-            #     Version: 1
-            #     Provider: Manual
-            #   # Configuration:
-            #   #   NotificationArn: !Ref CodePipelineSNSTopic
-            #   #   CustomData: Approve Production deployment
-            #   RunOrder: 1
 
       ArtifactStore:
         Type: S3
